@@ -1,0 +1,82 @@
+﻿<Window x:Class="TennisScoreTracker.TieBreakWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TennisScoreTracker"
+        mc:Ignorable="d"
+        Title="Score Tracker" Height="250" Width="500">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*" />
+                <ColumnDefinition Width="10*" />
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="1" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+                <Border Grid.Row ="0" BorderBrush ="Black" BorderThickness="0.5">
+                    <Grid Grid.Row="0" >
+                        <TextBox Text="{Binding Player1Name, UpdateSourceTrigger=PropertyChanged}"
+                                FontSize="35"
+                                FontFamily="Book Antiqua"
+                                TextWrapping="Wrap"
+                                FontWeight="ExtraBold"
+                                Foreground="Purple"
+                                   TextAlignment="Left"
+                                   VerticalAlignment="Center"/>
+                    </Grid>
+                </Border>
+                <Border Grid.Row="1" BorderBrush="Black" BorderThickness="0.5">
+                    <Grid Grid.Column="1" Grid.Row="0" >
+                        <TextBox Grid.Column ="1" 
+                                 Text="{Binding Player2Name, UpdateSourceTrigger=PropertyChanged}"
+                                FontSize="35"
+                                   TextWrapping="Wrap"
+                                FontFamily="Book Antiqua"
+                                FontWeight="ExtraBold"
+                                Foreground="Purple"
+                                   TextAlignment="Left"
+                                   VerticalAlignment="Center"/>
+                    </Grid>
+                </Border>
+            </Grid >
+            <TextBlock Grid.Column="0" Background="DarkGreen"/>
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Text="{Binding Player1GameScore}" FontSize="35" TextAlignment="Center" Background="Purple" Foreground="White" FontWeight="Bold" VerticalAlignment="Stretch"/>
+                <TextBlock Grid.Row="1" Text="{Binding Player2GameScore}" FontSize="35" TextAlignment="Center" Background="Purple" Foreground="White" FontWeight="Bold" VerticalAlignment="Stretch"/>
+            </Grid>
+            <Grid Grid.Column="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Text="{Binding Player1PointScore}" FontSize="35" TextAlignment="Center" Background="White" Foreground="Purple" FontWeight="Bold"  VerticalAlignment="Stretch"/>
+                <TextBlock Grid.Row="1" Text="{Binding Player2PointScore}" FontSize="35" TextAlignment="Center" Background="White" Foreground="Purple" FontWeight="Bold" VerticalAlignment="Stretch"/>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="1">
+            
+        </Grid>
+        <Grid Grid.Row="2">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                <Button Content="Player 1 Scores Point" Command="{Binding Player1PointCommand}" FontSize="14" Padding="10,5" Margin="10" Background="Purple" Foreground="White" BorderBrush="DarkBlue" BorderThickness="2"/>
+                <Button Content="Player 2 Scores Point" Command="{Binding Player2PointCommand}" FontSize="14" Padding="10,5" Margin="10" Background="Purple" Foreground="White" BorderBrush="DarkBlue" BorderThickness="2"/>
+                <Button Content="Reset Score" Command="{Binding ResetCommand}" FontSize="14" Padding="10,5" Margin="10" Background="Purple" Foreground="White" BorderBrush="DarkBlue" BorderThickness="2"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

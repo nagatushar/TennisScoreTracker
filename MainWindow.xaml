@@ -1,0 +1,137 @@
+﻿<Window x:Class="TennisScoreTracker.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="🎾 Tennis Score Tracker" 
+        Height="600" Width="800"
+        WindowStartupLocation="CenterScreen"
+        Background="DarkOliveGreen">
+    
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Title -->
+<TextBlock Grid.Row="0" 
+                   Text="🎾 TENNIS SCORE TRACKER" 
+                   FontSize="32" 
+                   FontWeight="Bold" 
+                   HorizontalAlignment="Center" 
+                   Foreground="White" 
+                   Margin="0,15,0,30"/>
+
+<!-- Score Display -->
+<Grid Grid.Row="1">
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="Auto"/>
+        <ColumnDefinition Width="*"/>
+    </Grid.ColumnDefinitions>
+
+    <!-- Player 1 Side -->
+    <Border Grid.Column="0" 
+                    Background="LightCyan" 
+                    CornerRadius="10" 
+                    Padding="20" 
+                    Margin="10">
+        <StackPanel>
+            <TextBlock Text="{Binding CurrentMatch.Player1.Name}" 
+                               FontSize="24" 
+                               FontWeight="Bold" 
+                               Foreground="Black" 
+                               HorizontalAlignment="Center"/>
+
+            <TextBlock Text="{Binding Player1GameScore}" 
+                               FontSize="72" 
+                               FontWeight="Bold" 
+                               Foreground="LightBlue" 
+                               HorizontalAlignment="Center" 
+                               Margin="0,20"/>
+
+            <TextBlock Text="{Binding Player1SetDisplay}" 
+                               FontSize="16" 
+                               Foreground="LightGray" 
+                               HorizontalAlignment="Center"/>
+
+            <Button Content="Award Point" 
+                            Command="{Binding Player1PointCommand}"
+                            FontSize="18" 
+                            Padding="20,10" 
+                            Margin="0,20,0,0"
+                            Background="LightBlue" 
+                            BorderBrush="DarkBlue" 
+                            BorderThickness="2"/>
+        </StackPanel>
+    </Border>
+
+    <!-- VS Separator -->
+    <TextBlock Grid.Column="1" 
+                       Text="VS" 
+                       FontSize="36" 
+                       FontWeight="Bold" 
+                       Foreground="White" 
+                       VerticalAlignment="Center" 
+                       HorizontalAlignment="Center" 
+                       Margin="20,0"/>
+
+    <!-- Player 2 Side -->
+    <Border Grid.Column="2" 
+                    Background="LightSalmon" 
+                    CornerRadius="10" 
+                    Padding="20" 
+                    Margin="10">
+        <StackPanel>
+            <TextBlock Text="{Binding CurrentMatch.Player2.Name}" 
+                               FontSize="24" 
+                               FontWeight="Bold" 
+                               Foreground="Black" 
+                               HorizontalAlignment="Center"/>
+
+            <TextBlock Text="{Binding Player2GameScore}" 
+                               FontSize="72" 
+                               FontWeight="Bold" 
+                               Foreground="LightCoral" 
+                               HorizontalAlignment="Center" 
+                               Margin="0,20"/>
+
+            <TextBlock Text="{Binding Player2SetDisplay}" 
+                               FontSize="16" 
+                               Foreground="LightGray" 
+                               HorizontalAlignment="Center"/>
+
+            <Button Content="Award Point" 
+                            Command="{Binding Player2PointCommand}"
+                            FontSize="18" 
+                            Padding="20,10" 
+                            Margin="0,20,0,0"
+                            Background="LightCoral" 
+                            BorderBrush="DarkRed" 
+                            BorderThickness="2"/>
+        </StackPanel>
+    </Border>
+</Grid>
+
+<!-- Match Status -->
+<TextBlock Grid.Row="2" 
+                   Text="{Binding MatchStatus}" 
+                   FontSize="28" 
+                   FontWeight="Bold" 
+                   HorizontalAlignment="Center" 
+                   Foreground="Yellow" 
+                   Margin="0,30,0,20"/>
+
+<!-- Reset Button -->
+<Button Grid.Row="3" 
+                Content="🔄 Reset Match" 
+                Command="{Binding ResetMatchCommand}"
+                FontSize="18" 
+                Padding="30,15" 
+                HorizontalAlignment="Center"
+                Background="FloralWhite" 
+                BorderBrush="IndianRed" 
+                BorderThickness="2"/>
+</Grid>
+</Window>
