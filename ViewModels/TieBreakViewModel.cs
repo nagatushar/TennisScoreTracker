@@ -33,8 +33,8 @@ namespace TennisScoreTracker.ViewModels
             }
         }
 
-        public int Player1GameScore => _currentTieBreak.player1.CurrentTBScore;
-        public int Player2GameScore => _currentTieBreak.player2.CurrentTBScore;
+        public int Player1GameScore => _currentTieBreak.player1.GamesWon;
+        public int Player2GameScore => _currentTieBreak.player2.GamesWon;
         public int Player1PointScore => _currentTieBreak.player1.CurrentTBScore;
         public int Player2PointScore => _currentTieBreak.player2.CurrentTBScore;
 

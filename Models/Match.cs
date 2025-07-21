@@ -30,6 +30,31 @@ namespace TennisScoreTracker.Models
             };
         }
 
+        public List<string> GetGameScoreDisplay(Player player1, Player player2)
+        {
+            if (player1.CurrentGameScore <= 3 && player2.CurrentGameScore <= 3)
+            {
+                return new List<string> { GetDisplayScore(player1.CurrentGameScore), GetDisplayScore(player2.CurrentGameScore) };
+            }
+
+            else if (player1.CurrentGameScore == player2.CurrentGameScore)
+                {
+                return new List<string> { "Deuce", "Deuce" };
+            }
+
+            else if (player1.CurrentGameScore > player2.CurrentGameScore)
+            {
+                return new List<string> { "Adv", "Deuce" };
+            }
+
+            else
+            {
+                return new List<string> { "Deuce", "Adv" };
+            }
+
+
+        }
+
         // Handle the complex tennis scoring logic
         public void AwardPoint(Player player)
         {

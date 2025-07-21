@@ -40,8 +40,8 @@ namespace TennisScoreTracker.ViewModels
         public ICommand ResetMatchCommand { get; }
 
         // Computed properties for the UI (like preparing the final dish presentation)
-        public string Player1GameScore => _currentMatch.GetDisplayScore(_currentMatch.Player1.CurrentGameScore);
-        public string Player2GameScore => _currentMatch.GetDisplayScore(_currentMatch.Player2.CurrentGameScore);
+        public string Player1GameScore => _currentMatch.GetGameScoreDisplay(_currentMatch.Player1, _currentMatch.Player2)[0];
+        public string Player2GameScore => _currentMatch.GetGameScoreDisplay(_currentMatch.Player1, _currentMatch.Player2)[1];
 
         public string MatchStatus
         {
