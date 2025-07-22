@@ -32,7 +32,12 @@ namespace TennisScoreTracker.Models
 
         public List<string> GetGameScoreDisplay(Player player1, Player player2)
         {
-            if (player1.CurrentGameScore <= 3 && player2.CurrentGameScore <= 3)
+            if (player1.GamesWon == 6 && player2.GamesWon == 6)
+            {
+                return new List<string> { $"{player1.CurrentGameScore}", $"{player2.CurrentGameScore}" };
+            }
+
+            else if (player1.CurrentGameScore <= 3 && player2.CurrentGameScore <= 3)
             {
                 return new List<string> { GetDisplayScore(player1.CurrentGameScore), GetDisplayScore(player2.CurrentGameScore) };
             }
@@ -62,27 +67,53 @@ namespace TennisScoreTracker.Models
 
             player.CurrentGameScore++;
 
-            // Check if game is won
-            if (IsGameWon(player))
+            if (player.GamesWon == 6)
             {
-                player.GamesWon++;
-                ResetGameScores();
-
-                // Check if set is won
-                if (IsSetWon(player))
+                // If in tiebreak, check if player won the tiebreak
+                if (IsTBWon(player))
                 {
-                    player.SetsWon++;
-                    ResetGameCounts();
-
-                    // Check if match is won (best of 3 sets)
-                    if (player.SetsWon >= 2)
+                    player.GamesWon++;
+                    ResetGameScores();
+                    // Check if set is won
+                    if (IsSetWon(player))
                     {
-                        IsMatchComplete = true;
-                        Winner = player;
+                        player.SetsWon++;
+                        ResetGameCounts();
+
+                        // Check if match is won (best of 3 sets)
+                        if (player.SetsWon >= 2)
+                        {
+                            IsMatchComplete = true;
+                            Winner = player;
+                        }
+                    }
+                }
+            }
+
+            if (player.GamesWon != 6)
+            {
+                if (IsGameWon(player))
+                {
+                    player.GamesWon++;
+                    ResetGameScores();
+
+                    // Check if set is won
+                    if (IsSetWon(player))
+                    {
+                        player.SetsWon++;
+                        ResetGameCounts();
+
+                        // Check if match is won (best of 3 sets)
+                        if (player.SetsWon >= 2)
+                        {
+                            IsMatchComplete = true;
+                            Winner = player;
+                        }
                     }
                 }
             }
         }
+
 
         private bool IsGameWon(Player player)
         {
@@ -93,13 +124,31 @@ namespace TennisScoreTracker.Models
                    player.CurrentGameScore - opponent.CurrentGameScore >= 2;
         }
 
+        private bool IsTBWon(Player player)
+        {
+            var opponent = player == Player1 ? Player2 : Player1;
+
+            return player.CurrentGameScore >= 7 &&
+                   player.CurrentGameScore - opponent.CurrentGameScore >= 2;
+        }
+
         private bool IsSetWon(Player player)
         {
             var opponent = player == Player1 ? Player2 : Player1;
 
-            // Need at least 6 games and lead by 2
-            return player.GamesWon >= 6 &&
-                   player.GamesWon - opponent.GamesWon >= 2;
+            // If 6 or more games, check if player has won the set
+            if (player.GamesWon >= 6 && opponent.GamesWon < 5)
+            {
+                return true; // Player wins set at 6-5 or 6-1
+            }
+
+            if (player.GamesWon == 7 && opponent.GamesWon <= 6)
+            {
+                return true; // Player wins set at 7-6 or 7-5
+            }
+
+            else
+            { return false; }
         }
 
         private void ResetGameScores()
