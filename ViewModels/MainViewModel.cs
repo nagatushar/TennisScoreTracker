@@ -43,6 +43,12 @@ namespace TennisScoreTracker.ViewModels
         public string Player1GameScore => _currentMatch.GetGameScoreDisplay(_currentMatch.Player1, _currentMatch.Player2)[0];
         public string Player2GameScore => _currentMatch.GetGameScoreDisplay(_currentMatch.Player1, _currentMatch.Player2)[1];
 
+        public string Player1SetScore => _currentMatch.Player1.GamesWon.ToString();
+        public string Player2SetScore => _currentMatch.Player2.GamesWon.ToString();
+
+        public string Player1SetsWon => _currentMatch.Player1.SetsWon.ToString();
+        public string Player2SetsWon => _currentMatch.Player2.SetsWon.ToString();
+
         public string MatchStatus
         {
             get
@@ -52,12 +58,6 @@ namespace TennisScoreTracker.ViewModels
                 return "Match in Progress";
             }
         }
-
-        public string Player1SetDisplay =>
-            $"Sets: {_currentMatch.Player1.SetsWon} | Games: {_currentMatch.Player1.GamesWon}";
-
-        public string Player2SetDisplay =>
-            $"Sets: {_currentMatch.Player2.SetsWon} | Games: {_currentMatch.Player2.GamesWon}";
 
         private void AwardPoint(Player player)
         {
@@ -76,8 +76,10 @@ namespace TennisScoreTracker.ViewModels
         {
             OnPropertyChanged(nameof(Player1GameScore));
             OnPropertyChanged(nameof(Player2GameScore));
-            OnPropertyChanged(nameof(Player1SetDisplay));
-            OnPropertyChanged(nameof(Player2SetDisplay));
+            OnPropertyChanged(nameof(Player1SetScore));
+            OnPropertyChanged(nameof(Player2SetScore));
+            OnPropertyChanged(nameof(Player1SetsWon));
+            OnPropertyChanged(nameof(Player2SetsWon));
             OnPropertyChanged(nameof(MatchStatus));
         }
 

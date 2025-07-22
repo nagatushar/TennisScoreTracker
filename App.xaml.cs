@@ -9,7 +9,7 @@ namespace TennisScoreTracker
         {
             base.OnStartup(e);
 
-            MainWindow mainWindow = new MainWindow();
+            SetWindow mainWindow = new SetWindow();
             //TieBreakWindow mainWindow = new TieBreakWindow();
             mainWindow.Show();
 
